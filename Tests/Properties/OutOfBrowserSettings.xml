@@ -1,0 +1,7 @@
+<OutOfBrowserSettings ShortName="Cellz Tests" EnableGPUAcceleration="True" ShowInstallMenuItem="False">
+  <OutOfBrowserSettings.Blurb>TCellz Automated Acceptance Tests.</OutOfBrowserSettings.Blurb>
+  <OutOfBrowserSettings.WindowSettings>
+    <WindowSettings Title="Cellz Tests" />
+  </OutOfBrowserSettings.WindowSettings>
+  <OutOfBrowserSettings.Icons />
+</OutOfBrowserSettings>

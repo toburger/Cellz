@@ -1,0 +1,51 @@
+﻿Feature: Changes in referenced cells should be propagated to their dependent cells
+
+Scenario: Change propagates from a value cell to a reference cell
+	Given a sheet with data:
+	 | Row | A   |
+	 |  1  | 1   |
+	 |  2  | =A1 |
+	When the values are changed:
+	 | Cell | Value |
+	 | A1   | 2     |
+	Then the values should equal:
+	 | Cell | Value |
+	 | A2   | 2     |
+
+Scenario: Change propagates from a value cell to a reference to a reference
+	Given a sheet with data:
+	 | Row | A   |
+	 |  1  | 1   |
+	 |  2  | =A1 |
+	 |  3  | =A2 |
+	When the values are changed:
+	 | Cell | Value |
+	 | A1   | 2     |
+	Then the values should equal:
+	 | Cell | Value |
+	 | A3   | 2     |
+
+Scenario: Change propagates from a value cell to a reference via 2 references
+	Given a sheet with data:
+	 | Row | A   |
+	 |  1  | 1   |
+	 |  2  | =A1 |
+	 |  3  | =A2 |
+	 |  4  | =A3 |
+	When the values are changed:
+	 | Cell | Value |
+	 | A1   | 2     |
+	Then the values should equal:
+	 | Cell | Value |
+	 | A4   | 2     |
+
+Scenario: Change propagates from a value cell to a reference via 3 references
+	Given a sheet with data:
+	 | Row |  A  |  B  |  C  |  D  |  E  |
+	 |  1  |  1  | =A1 | =B1 | =C1 | =D1 |
+	When the values are changed:
+	 | Cell | Value |
+	 | A1   | 2     |
+	Then the values should equal:
+	 | Cell | Value |
+	 | E1   | 2     |

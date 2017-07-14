@@ -1,0 +1,51 @@
+﻿Feature: Compute the sum from a set of cells
+
+Scenario: Sum from 1 cell
+	Given a sheet with data:
+	 | Row | A          |
+	 |  1  | 1          |
+	 |  2  | =<formula> |
+	When the cell values are computed
+	Then the values should equal:
+	 | Cell | Value |
+	 |  A2  | 1     |
+
+Examples:
+     | formula    |
+	 | A1         |
+	 | SUM(A1)    |
+	 | SUM(A1:A1) |
+
+Scenario: Sum from 2 vertical cells
+	Given a sheet with data:
+	 | Row | A          |
+	 |  1  | 10         |
+	 |  2  | 100        |
+	 |  3  | =<formula> |
+	When the cell values are computed
+	Then the values should equal:
+	 | Cell | Value |
+	 |  A3  | 110   |
+
+Examples:
+     | formula    |
+	 | A1+A2      |
+	 | SUM(A1,A2) |
+	 | SUM(A1:A2) |
+	 | SUM(A2:A1) |
+
+Scenario: Sum from 3 horizontal cells
+	Given a sheet with data:
+	 | Row | A  | B  | C   | D          |
+	 |  1  | 1  | 10 | 100 | =<formula> |
+	When the cell values are computed
+	Then the values should equal:
+	 | Cell | Value |
+	 |  D1  | 111   |
+
+Examples:
+     | formula       |
+	 | A1+B1+C1      |
+	 | SUM(A1,B1,C1) |
+	 | SUM(A1:C1)    |
+	 | SUM(C1:A1)    |

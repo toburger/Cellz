@@ -1,0 +1,25 @@
+﻿Feature: In order that I know when a formula is incorrect I want to be notitified of circular references
+
+Scenario: Cell references itself
+	Given a sheet with data:
+	 | Row | A   |
+	 |  1  | =A1 |
+	Then an error notification is received
+
+Scenario: 2 cells reference each other
+	Given a sheet with data:
+	 | Row | A   |
+	 |  1  | =A2 |
+	 |  2  | =A1 |
+	Then an error notification is received
+
+Scenario: Cell references a cyclical reference
+	Given a sheet with data:
+	 | Row | A   |
+	 |  1  | =A2 |
+	 |  2  | =A1 |
+     |  3  |     |
+	When the values are changed:
+	 | Cell | Value |
+	 | A3   | =A2   |
+	Then an error notification is received

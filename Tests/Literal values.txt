@@ -1,0 +1,56 @@
+﻿Feature: Compute literal values
+
+Scenario: Add values
+	Given a sheet with data:
+	 | Row | A          |
+	 |  1  | =<formula> |
+	When the cell values are computed
+	Then the values should equal:
+	 | Cell | Value   |
+	 |  A1  | <value> |
+
+Examples:
+	| formula       | value |
+	| 1+10          | 11    |
+	| 10+1          | 11    |
+	| 10 + 1        | 11    |
+	| SUM(1,10)     | 11    |
+	| SUM(10,1)     | 11    |
+	| SUM(1,10,100) | 111   |
+
+Scenario: Subtract values
+	Given a sheet with data:
+	 | Row | A          |
+	 |  1  | =<formula> |
+	When the cell values are computed
+	Then the values should equal:
+	 | Cell | Value   |
+	 |  A1  | <value> |
+
+Examples:
+	| formula       | value |
+	| 10-1          | 9     |
+	| 1-10          | -9    |
+	| SUM(10,-1)    | 9     |
+	| SUM(-10,1)    | -9    |
+	| 1-2-3         | -4    |
+	| 1-(2+3)       | -4    |
+	| 1-1+3         | 3     |
+	| SUM(1,-2,-3)  | -4    |
+	| SUM(1,-1,3)   | 3     |
+
+Scenario: Multiply values
+	Given a sheet with data:
+	 | Row | A          |
+	 |  1  | =<formula> |
+	When the cell values are computed
+	Then the values should equal:
+	 | Cell | Value   |
+	 |  A1  | <value> |
+
+Examples:
+	| formula       | value |
+	| 2*3           | 6     |
+	| 2*3*4         | 24    |
+	| 2*3*-4        | -24   |
+
